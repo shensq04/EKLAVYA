@@ -18,7 +18,7 @@ These 5168 binaries are obtained by using two commonly used compilers: *gcc* and
 - [clean_pickles.tar.gz](https://drive.google.com/open?id=0B2qBKMQRQLHGOFphWjkzcnV2LTQ). The compressed file saves the assembly code and the ground truth of the function arguments for sanitized functions. For this dataset, we removed the functions which are duplicates of other functions in the dataset. Given that the same piece of code compiled with different binaries will result in different offsets generated,we chose to remove all direct address used by instructions found in the function. For example, the instruction *'je 0x98'* are represented as *'je '*. After the substituion, we hash the function and remove functions with the same hashes. Other than duplicates, we also removed functions with less than four instructions as these small functions typically do not have any operation on arguments. 
 
 
-###Function Representation
+### Function Representation
 A function is represented as a dictionary having the following fields:
 
 - **num_args**: Integer - Number of arguments.
@@ -40,7 +40,7 @@ FuncDict = {
 }
 ```
 
-###Binary Representation
+### Binary Representation
 A binary saved in **pickles.tar.gz** and **clean_pickles.tar.gz** is represented as a Dict object, having the following fields:
 
 - **functions**: Dict - Ths dictionary contains as keys function names and as values function dictionaries which is described above. The information of dupilicate functions are removed from the dictionary.
@@ -85,15 +85,16 @@ BinaryFileDict = {
 }
 ```
 ## Code
-###Requirement
+
+### Requirement
 
 - tensorflow
 - numpy
 
-###Train Embedding Model
+### Train Embedding Model
 
 
-###Train RNN Model
+### Train RNN Model
 Usage: 
 ```
 python train/train.py [options] -d data_folder -o output_dir -f split_func_path -e embed_path
@@ -125,7 +126,7 @@ Options:
 - **-b**: Batch size.
 - **-p**: The frequency for showing the accuracy & cost value.
 
-###Testing RNN Model
+### Testing RNN Model
 
 
 
