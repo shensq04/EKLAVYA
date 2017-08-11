@@ -9,17 +9,6 @@ import base64
 
 import tensorflow as tf
 from tensorflow.models.embedding import gen_word2vec
-import ConfigParser
-
-def read_config(config_path, sec_name):
-    config = ConfigParser.SafeConfigParser()
-    config.read(config_path)
-    config_raw = config.items(sec_name)
-    config_info=dict()
-
-    for key, value in config_raw:
-        config_info[key]=value
-    return config_info
 
 
 embeddings = {}
