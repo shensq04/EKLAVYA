@@ -7,17 +7,40 @@ int2insn_map_path: the map information(int -> insn (int list))
 '''
 
 import pickle
-import get_file_path
 import argparse
 import sys
 import os
 import insn_int
 
 
+def get_file_path(folder_path, tag):
+    path_list=[]
+    file_list=os.listdir(folder_path)
+    '''initial path list'''
+    for file_name in file_list:
+        path_list.append(os.path.join(folder_path, file_name))
+
+    final_path_list=[]
+    tag_len = len(tag)
+    '''get all specific path'''
+    while(len(path_list) > 0):
+        source_path=path_list[0]
+        path_list.remove(source_path)
+        if not os.path.isdir(source_path) and (source_path[-tag_len-1] == '.') and (source_path[-tag_len:] == tag):
+            final_path_list.append(source_path)
+        elif os.path.isdir(source_path):
+            file_list=os.listdir(source_path)
+            for file_name in file_list:
+                path_list.append(os.path.join(source_path, file_name))
+        else:
+            pass
+    return final_path_list
+
+
 class GetVocab(object):
     def __init__(self, config):
         self.config = config
-        self.path_list=get_file_path.get_file_path(self.config['input_folder_path'], 'pkl')
+        self.path_list=get_file_path(self.config['input_folder_path'], 'pkl')
         self.int2insn_map=dict()
         self.get_embed_input()
 
