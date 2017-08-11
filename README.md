@@ -209,7 +209,7 @@ Options:
 The code is research-quality proof of concept, and is still under development for more features and bug-fixing.
 
 ## References
-[Neural Nets Can Learn Function Type Signatures From Binaries](www.google.com)
+Neural Nets Can Learn Function Type Signatures From Binaries
 
 Zheng Leong Chua, Shiqi Shen, Prateek Saxena, Zhenkai Liang.
 
