@@ -93,12 +93,58 @@ BinaryFileDict = {
 
 ### Train Embedding Model
 
+1. Prepare the input file for training embedding model
+```
+python prep_embed_input.py [options] -i input_folder
+```
+[Link to prep_embed_input.py](embedding/prep_embed_input.py)
+
+- **input_folder**: String - The data folder saving all binary information.
+
+Options:
+
+- **-o**: String - The input file for training embedding model
+- **-e**: String - The file saving all error information
+- **-m**: String - The file saving the map information (int --> instruction (int list))
+
+2. Train the embedding model
+```
+python train_embed.py -i input_path
+```
+[Link to train_embed.py](embedding/train_embed.py)
+
+- **input_path**: String - The input file for training embedding model 
+
+Options:
+- **-o**: String - The output folder saving the trained embedding information
+- **-tn**: Integer - Number of threads
+- **-sw**: Integer - Saving frequency (Number of epochs). The trained information will be saved every several epochs.
+- **-e**: Integer - Dimension of the embedding vector for each instruction.
+- **-ne**: Integer - Number of epochs for training the embedding model
+- **-l**: Float - Learning rate
+- **-nn**: Integer - Number of negative samples
+- **-b**: Integer - Batch size
+- **-ws**: Integer - Window size
+- **-mc**: Integer - Ignoring all words with total frequency lower than this.
+- **-s**: Float - Subsampling threshold
+
+3. Save the embedding vector
+```
+python save_embeddings.py [options] -p embed_pickle_path -m model_path
+```
+[Link to save_embeddings.py](embedding/save_embeddings.py)
+
+- **embed_pickle_path**: String - The file saving all training parameters
+- **model_path**: String - The file saving the trained embedding model
+
+Options:
+- **-o**: String: The output file saving the embedding vector for each instruction
 
 ### Train RNN Model
-Usage: 
 ```
-python train/train.py [options] -d data_folder -o output_dir -f split_func_path -e embed_path
+python train.py [options] -d data_folder -o output_dir -f split_func_path -e embed_path
 ```
+[Link to train.py](RNN/train/train.py)
 
 - **data_folder**: The folder saves the binary information.  
 - **output_dir**: The directory is used to save the trained model & log information.
@@ -111,6 +157,7 @@ Options:
 	- **num_args**: The trained model is used to predict the number of arguments for each function.
 	- **type#0**: The trained model is used to predict the type of first argument for each function.
 	- **type#1**: The trained model is used to predict the type of second argument for each function.
+	- ...
 - **-dt**: Type of input data. Possible value: caller and callee.
 	- **caller**: The input data is from caller.
 	- **callee**: The input data is function body.
@@ -127,7 +174,35 @@ Options:
 - **-p**: The frequency for showing the accuracy & cost value.
 
 ### Testing RNN Model
+Usage: 
+```
+python eval.py [options] -d data_folder -f split_func_path -e embed_path -m model_dir -o output_dir
+```
+[Link to eval.py](RNN/test/eval.py)
 
+- **data_folder**: The folder saves the binary information.  
+- **split_func_path**: The file saves the training & testing function names.
+- **embed_path**: The file saves the embedding vector of each instruction.
+- **model_dir**: The directory is used to save the trained model & log information.
+- **output_dir**: The directory is used to saved the predicted results and true labels of each function for each model.
+
+Options:
+
+- **-t**: Type of output labels. Possible value: num_args, type#0, type#1, ...
+	- **num_args**: The trained model is used to predict the number of arguments for each function.
+	- **type#0**: The trained model is used to predict the type of first argument for each function.
+	- **type#1**: The trained model is used to predict the type of second argument for each function.
+	- ...
+- **-dt**: Type of input data. Possible value: caller and callee.
+	- **caller**: The input data is from caller.
+	- **callee**: The input data is function body.
+- **-pn**: Number of Processes.
+- **-ed**: Dimension of embedding vector for each instruction.
+- **-ml**: Maximum length of input sequences.
+- **-nc**: Number of Classes.
+- **-do**: Dropout value.
+- **-nl**: Number of layers in RNN.
+- **-b**: Batch size.
 
 
 ## Disclaimer
@@ -139,3 +214,6 @@ The code is research-quality proof of concept, and is still under development fo
 Zheng Leong Chua, Shiqi Shen, Prateek Saxena, Zhenkai Liang.
 
 In the 26th USENIX Security Symposium (Usenix Security 2017)
+
+## Project Members
+Zheng Leong Chua, Shiqi Shen, Prateek Saxena, Zhenkai Liang, Valentin Ghita.
