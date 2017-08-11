@@ -97,7 +97,7 @@ BinaryFileDict = {
 ```
 python prep_embed_input.py [options] -i input_folder
 ```
-[Link to prep_embed_input.py](embedding/prep_embed_input.py)
+[Link to prep_embed_input.py](code/embedding/prep_embed_input.py)
 
 - **input_folder**: String - The data folder saving all binary information.
 
@@ -111,7 +111,7 @@ Options:
 ```
 python train_embed.py -i input_path
 ```
-[Link to train_embed.py](embedding/train_embed.py)
+[Link to train_embed.py](code/embedding/train_embed.py)
 
 - **input_path**: String - The input file for training embedding model 
 
@@ -132,7 +132,7 @@ Options:
 ```
 python save_embeddings.py [options] -p embed_pickle_path -m model_path
 ```
-[Link to save_embeddings.py](embedding/save_embeddings.py)
+[Link to save_embeddings.py](code/embedding/save_embeddings.py)
 
 - **embed_pickle_path**: String - The file saving all training parameters
 - **model_path**: String - The file saving the trained embedding model
@@ -144,7 +144,7 @@ Options:
 ```
 python train.py [options] -d data_folder -o output_dir -f split_func_path -e embed_path
 ```
-[Link to train.py](RNN/train/train.py)
+[Link to train.py](code/RNN/train/train.py)
 
 - **data_folder**: The folder saves the binary information.  
 - **output_dir**: The directory is used to save the trained model & log information.
@@ -178,7 +178,7 @@ Usage:
 ```
 python eval.py [options] -d data_folder -f split_func_path -e embed_path -m model_dir -o output_dir
 ```
-[Link to eval.py](RNN/test/eval.py)
+[Link to eval.py](code/RNN/test/eval.py)
 
 - **data_folder**: The folder saves the binary information.  
 - **split_func_path**: The file saves the training & testing function names.
