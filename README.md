@@ -91,7 +91,7 @@ BinaryFileDict = {
 
 ### Train Embedding Model
 
-1. Prepare the input file for training embedding model
+#### Prepare the input file for training embedding model
 ```
 python prep_embed_input.py [options] -i input_folder
 ```
@@ -105,7 +105,7 @@ Options:
 - **-e**: String - The file saving all error information
 - **-m**: String - The file saving the map information (int --> instruction (int list))
 
-2. Train the embedding model
+#### Train the embedding model
 ```
 python train_embed.py -i input_path
 ```
@@ -126,7 +126,7 @@ Options:
 - **-mc**: Integer - Ignoring all words with total frequency lower than this.
 - **-s**: Float - Subsampling threshold
 
-3. Save the embedding vector
+#### Save the embedding vector
 ```
 python save_embeddings.py [options] -p embed_pickle_path -m model_path
 ```
