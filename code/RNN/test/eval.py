@@ -247,7 +247,7 @@ def get_config():
     parser.add_argument('-nc', '--num_classes', dest='num_classes', help='The number of classes', type=int, required=False, default=16)
     parser.add_argument('-do', '--dropout', dest='dropout', help='The dropout value.', type=float, required=False, default=1.0)
     parser.add_argument('-nl', '--num_layers', dest='num_layers', help='Number of layers in RNN.', type=int, required=False, default=3)
-    parser.add_argument('-b', '--batch_size', dest='batch_size', help='The size of batch.', type=int, required=False, default=100)
+    parser.add_argument('-b', '--batch_size', dest='batch_size', help='The size of batch.', type=int, required=False, default=256)
 
     args = parser.parse_args()
     

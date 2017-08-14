@@ -146,8 +146,8 @@ python train.py [options] -d data_folder -o output_dir -f split_func_path -e emb
 
 - **data_folder**: The folder saves the binary information.  
 - **output_dir**: The directory is used to save the trained model & log information.
-- **split_func_path**: The file saves the training & testing function names. [Here is the link to the Format](#split_func_path-format)
-- **embed_path**: The file saves the embedding vector of each instruction.
+- **[split_func_path](#split_func_path-format)**: The file saves the training & testing function names.
+- **embed_path**: The file is the output file of **save_embeddings.py**, which saves the embedding vector of each instruction.
 
 Options:
 
@@ -211,8 +211,19 @@ splitFuncDict={
 }
 ```
 
-#### embed_path Format
+<!-- #### embed_path Format
+The embed_path file saves a dictionary saving the embedding vectors for all instruction. The key of this dictionary is a special string for each instruction. For example, if the bytes vector for one instruction is [232, 164, 254, 0, 0], the key for this instruction is '[232, 164, 254, 0, 0]'. The value of each instruction 
 
+Example of embed_path:
+embedDict = {
+    '[232, 164, 254, 0, 0]': {
+        'vector': [-0.15424642, -0.03994527, -0.06539968, 0.099554, ...]
+    }, 
+    '[186, 195, 128, 10, 8]': {
+        'vector': [0.09991222, 0.05001251, 0.11093043, 0.0041295, ...]
+    },
+    ...
+} -->
 
 ### Testing RNN Model
 Usage: 
@@ -222,8 +233,8 @@ python eval.py [options] -d data_folder -f split_func_path -e embed_path -m mode
 [Link to eval.py](code/RNN/test/eval.py)
 
 - **data_folder**: The folder saves the binary information.  
-- **split_func_path**: The file saves the training & testing function names.
-- **embed_path**: The file saves the embedding vector of each instruction.
+- **[split_func_path](#split_func_path-format)**: The file saves the training & testing function names.
+- **embed_path**: The file is the output file of **save_embeddings.py**, which saves the embedding vector of each instruction.
 - **model_dir**: The directory is used to save the trained model & log information.
 - **output_dir**: The directory is used to saved the predicted results and true labels of each function for each model.
 
