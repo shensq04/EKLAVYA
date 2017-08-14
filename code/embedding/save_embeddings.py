@@ -18,13 +18,13 @@ def get_config():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--embed_pickle_path', dest='embed_pickle_path', help='The file saving all training parameters', type=str, required=True)
     parser.add_argument('-m', '--model_path', dest='model_path', help='The file saving the trained embedding model', type=str, required=True)
-    parser.add_argument('-o', '--output_file', dest='output_file', help='The file saving the embedding vector for each instruction', type=str, required=Fasle, default='embed.pkl')
+    parser.add_argument('-o', '--output_file', dest='output_file', help='The file saving the embedding vector for each instruction', type=str, required=False, default='embed.pkl')
 
     args = parser.parse_args()
 
     config_info = {
         'embed_pickle_path': args.embed_pickle_path,
-        'model_path': arg.model_path,
+        'model_path': args.model_path,
         'output_file': args.output_file
     }
 
