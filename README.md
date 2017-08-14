@@ -6,8 +6,6 @@ EKLAVYA is designed by Zheng Leong Chua, Shiqi Shen, Prateek Saxena, Zhenkai Lia
 ## Dataset
 The dataset available from this page is the collection of function type signatures, which include function banaries, arguments counts and types. It is a good dataset for people who want to try learning techniques or heuristive methods in binary analysis while spending less effort on collecting and preprocessing.
 
-<!-- The whole dataset is available on [National Cybersecurity R&D Lab](https://ncl.sg/). 
- -->
  The dataset consists of three parts, which is described below:
 
 - [binary.tar.gz](https://drive.google.com/open?id=0B2qBKMQRQLHGS1JESVQ0TlF1eWs). The compressed file saves 5168 binaries. These binaries are from 8 distinct packages: binutils, coreutils, findutils, sg3utils, utillinux, inetutils, diffutils, and usbutils.
@@ -148,30 +146,73 @@ python train.py [options] -d data_folder -o output_dir -f split_func_path -e emb
 
 - **data_folder**: The folder saves the binary information.  
 - **output_dir**: The directory is used to save the trained model & log information.
-- **split_func_path**: The file saves the training & testing function names.
+- **split_func_path**: The file saves the training & testing function names. [Here is the link to the Format](#split_func_path-format)
 - **embed_path**: The file saves the embedding vector of each instruction.
 
 Options:
 
-- **-t**: Type of output labels. Possible value: num_args, type#0, type#1, ...
+- **-t**: Type of output labels. Possible value: num_args, type#0, type#1, ... (Default value: num_args)
 	- **num_args**: The trained model is used to predict the number of arguments for each function.
 	- **type#0**: The trained model is used to predict the type of first argument for each function.
 	- **type#1**: The trained model is used to predict the type of second argument for each function.
 	- ...
-- **-dt**: Type of input data. Possible value: caller and callee.
+- **-dt**: Type of input data. Possible value: caller and callee. (Default value: callee)
 	- **caller**: The input data is from caller.
 	- **callee**: The input data is function body.
-- **-pn**: Number of Processes.
-- **-ed**: Dimension of embedding vector for each instruction.
-- **-ml**: Maximum length of input sequences.
-- **-nc**: Number of Classes.
-- **-en**: Number of Epochs.
-- **-s**: The frequency for saving the trained model. If the value is 100, the trained model is going to be saved every 100 batches.
-- **-do**: Dropout value.
-- **-nl**: Number of layers in RNN.
-- **-ms**: Maximum number of model saved in the directory.
-- **-b**: Batch size.
-- **-p**: The frequency for showing the accuracy & cost value.
+- **-pn**: Number of Processes. (Default value: 40)
+- **-ed**: Dimension of embedding vector for each instruction. (Default value: 256)
+- **-ml**: Maximum length of input sequences. (Default value: 500)
+- **-nc**: Number of Classes. (Default value: 16)
+- **-en**: Number of Epochs. (Default value: 100)
+- **-s**: The frequency for saving the trained model. If the value is 100, the trained model is going to be saved every 100 batches. (Default value: 100)
+- **-do**: Dropout value. (Default value: 0.8)
+- **-nl**: Number of layers in RNN. (Default value: 3)
+- **-ms**: Maximum number of model saved in the directory. (Default value: 100)
+- **-b**: Batch size. (Default value: 256)
+- **-p**: The frequency for showing the accuracy & cost value. (Default value: 20)
+
+#### split_func_path Format
+The split_func_path file saves the function names for training & testing dataset. If you are going to predict the type signatures from callees (function bodies), the function name is represented as "binary_file_name#func_name". If you are going to predict the type signatures from callers, the function name is represented as "binary_file_name#callee_name#caller_name#call_insn_indice".
+
+Examples of split_func_path file for callees:
+```
+splitFuncDict = {
+    'train':[
+                'gcc-32-O1-binutils-objdump.pkl#OP_Rounding',
+                'clang-32-O1-coreutils-csplit.pkl#keep_new_line',
+                'gcc-32-O3-coreutils-mv.pkl#copy_internal',
+                ...
+            ],
+    'test': [
+                'gcc-32-O3-findutils-find.pkl#parse_amin',
+                'gcc-32-O2-findutils-find.pkl#pred_size',
+                'clang-32-O1-findutils-find.pkl#debug_strftime',
+                ...
+            ]
+}
+```
+
+Examples of split_func_path file for callers:
+
+```
+splitFuncDict={
+    'train':[
+                'clang-32-O3-utillinux-dmesg.pkl#strnchr#print_record#283',
+                'gcc-32-O3-coreutils-numfmt.pkl#process_line#main#386',
+                'gcc-32-O3-coreutils-numfmt.pkl#process_line#main#557',
+                ...
+            ],
+    'test': [
+                'clang-32-O0-utillinux-utmpdump.pkl#gettok#undump#123',
+                'gcc-32-O0-utillinux-ionice.pkl#ioprio_print#main#315',
+                'clang-32-O1-inetutils-ping.pkl#ping_set_packetsize#ping_echo#24',
+                ...
+            ]
+}
+```
+
+#### embed_path Format
+
 
 ### Testing RNN Model
 Usage: 
@@ -188,21 +229,22 @@ python eval.py [options] -d data_folder -f split_func_path -e embed_path -m mode
 
 Options:
 
-- **-t**: Type of output labels. Possible value: num_args, type#0, type#1, ...
+- **-t**: Type of output labels. Possible value: num_args, type#0, type#1, ... (Default value: num_args)
 	- **num_args**: The trained model is used to predict the number of arguments for each function.
 	- **type#0**: The trained model is used to predict the type of first argument for each function.
 	- **type#1**: The trained model is used to predict the type of second argument for each function.
 	- ...
-- **-dt**: Type of input data. Possible value: caller and callee.
+- **-dt**: Type of input data. Possible value: caller and callee. (Default value: callee)
 	- **caller**: The input data is from caller.
 	- **callee**: The input data is function body.
-- **-pn**: Number of Processes.
-- **-ed**: Dimension of embedding vector for each instruction.
-- **-ml**: Maximum length of input sequences.
-- **-nc**: Number of Classes.
-- **-do**: Dropout value.
-- **-nl**: Number of layers in RNN.
-- **-b**: Batch size.
+- **-pn**: Number of Processes. (Default value: 40)
+- **-ed**: Dimension of embedding vector for each instruction. (Default value: 256)
+- **-ml**: Maximum length of input sequences. (Default value: 500)
+- **-nc**: Number of Classes. (Default value: 16)
+- **-do**: Dropout value.(Default value: 1.0)
+- **-nl**: Number of layers in RNN. (Default value: 3)
+- **-b**: Batch size. (Default value: 256)
+
 
 
 ## Disclaimer

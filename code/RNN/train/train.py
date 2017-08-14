@@ -246,7 +246,7 @@ def get_config():
     parser.add_argument('-do', '--dropout', dest='dropout', help='The dropout value.', type=float, required=False, default=0.8)
     parser.add_argument('-nl', '--num_layers', dest='num_layers', help='Number of layers in RNN.', type=int, required=False, default=3)
     parser.add_argument('-ms', '--max_to_save', dest='max_to_save', help='Maximum number of models saved in the directory.', type=int, required=False, default=100)
-    parser.add_argument('-b', '--batch_size', dest='batch_size', help='The size of batch.', type=int, required=False, default=100)
+    parser.add_argument('-b', '--batch_size', dest='batch_size', help='The size of batch.', type=int, required=False, default=256)
     parser.add_argument('-p', '--summary_frequency', dest='summary_frequency', help='The frequency of showing the accuracy & cost value.', type=int, required=False, default=20)
 
     args = parser.parse_args()
