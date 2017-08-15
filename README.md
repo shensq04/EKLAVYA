@@ -4,7 +4,7 @@
 EKLAVYA is designed by Zheng Leong Chua, Shiqi Shen, Prateek Saxena, Zhenkai Liang.
 
 ## Dataset
-The dataset available from this page is the collection of function type signatures, which include function banaries, arguments counts and types. It is a good dataset for people who want to try learning techniques or heuristive methods in binary analysis while spending less effort on collecting and preprocessing.
+The dataset available from this page is the collection of function type signatures, which includes function banaries, number of arguments and types. It is a good dataset for people who want to try learning techniques or heuristic approaches in binary analysis while spending less effort on collecting and preprocessing.
 
  The dataset consists of three parts, which is described below:
 
@@ -41,13 +41,13 @@ FuncDict = {
 ### Binary Representation
 A binary saved in **pickles.tar.gz** and **clean_pickles.tar.gz** is represented as a Dict object, having the following fields:
 
-- **functions**: Dict - Ths dictionary contains as keys function names and as values function dictionaries which is described above. The information of dupilicate functions are removed from the dictionary.
-- **structures**: Dict -The dictionary describing structures used in the binary files. Dictionary's keys are names of the structures and the values are lists containing the type of each field in the structure, in the order they are declared.
+- **functions**: Dict - This dictionary contains as keys function names and as values function dictionaries which is described above. Dupilicate functions are removed from this dictionary in **clean_pickles.tar.gz**.
+- **structures**: Dict -This dictionary describing structures used in the binary files. Dictionary's keys are names of the structures and the values are lists containing the type of each field in the structure, in the order they are declared.
 - **text_addr**: String - Address of the text section in the binary.
 - **binRawBytes**: String - Raw contents of the binary file.
 - **arch**: String - Binary architecture.
 - **binary_filename**: String - Name of the binary elf file used to generate the binInfo.
-- **function_calls**: Dict - The dictionary containing information about function calls. A caller is described using its name and an array of instruction indices, starting from 0. (If **10** is in the array, the **10th** instruction in the caller is a call to the callee.)
+- **function_calls**: Dict - This dictionary containing information about function calls. A caller is described using its name and an array of instruction indices, starting from 0. (If **10** is in the array, the **10th** instruction in the caller is a call to the callee.)
 	- Key: callee function's name
 	- Value: array of objects describing function callers
 
@@ -84,7 +84,7 @@ BinaryFileDict = {
 ```
 ## Code
 
-### Requirement
+### Requirements
 
 - tensorflow
 - numpy
