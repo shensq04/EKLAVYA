@@ -1,7 +1,7 @@
 # Neural Nets Can Learn Function Type Signatures From Binaries
 
 ## Authors
-EKLAVYA is designed by Zheng Leong Chua, Shiqi Shen, Prateek Saxena, Zhenkai Liang.
+EKLAVYA is designed by [Zheng Leong Chua](https://www.comp.nus.edu.sg/~chuazl/), Shiqi Shen, [Prateek Saxena](https://www.comp.nus.edu.sg/~prateeks/), [Zhenkai Liang](https://www.comp.nus.edu.sg/~liangzk/).
 
 ## Dataset
 The dataset available from this page is the collection of function type signatures, which includes function banaries, number of arguments and types. It is a good dataset for people who want to try learning techniques or heuristic approaches in binary analysis while spending less effort on collecting and preprocessing.
