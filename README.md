@@ -101,7 +101,7 @@ python prep_embed_input.py [options] -i input_folder
 
 Options:
 
-- **-o**: String - The input file for training embedding model
+- **-o**: String - The output file for training embedding model
 - **-e**: String - The file saving all error information
 - **-m**: String - The file saving the map information (int --> instruction (int list))
 
